@@ -1,8 +1,10 @@
 def enc(i,j,v):
     return i*100 + j*10 + v
 
+import sys
 
-g = open("sudokus")
+g = open(sys.argv[1])
+
 count = 1
 for sudoku in g:
     count += 1
