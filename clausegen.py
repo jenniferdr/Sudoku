@@ -28,11 +28,11 @@ for sudoku in g:
 
     f.write("p cnf 999 "+str(total)+"\n")
 
-    # Reglas unitarias: casillas con valor fijo
+    # Reglas unitarias: casillas con valor fijo 
     for c in unitarias:
         f.write(str(c)+" 0\n")
 
-    # Cada casilla debe tener un valor
+    # Cada casilla debe tener un valor 81 clausulas
     for i in range(1,10):
         for j in range(1,10):
             s = str(enc(i,j,1))
@@ -41,27 +41,29 @@ for sudoku in g:
             s += " 0\n"
             f.write(s)
 
-    # Un valor por casilla
+    # Solo Un valor por casilla 2916 clausulas 
     for i in range(1,10):
         for j in range(1,10):
             for v in range(1,10):
                 for v2 in range(v+1,10):
                     f.write(str(-enc(i,j,v))+" "+str(-enc(i,j,v2))+" 0\n")
 
-    #No repetir valores en fila
+    #No repetir valores en fila 2916 clausulas 
     for i in range(1,10):
         for j in range(1,10):
             for j2 in range(j+1,10):
                 for v in range(1,10):
                     f.write(str(-enc(i,j,v))+" "+str(-enc(i,j2,v))+" 0\n")
 
-    #No repetir valores en columna
+    #No repetir valores en columna 2916 clausulas
     for i in range(1,10):
         for i2 in range(i+1,10):
             for j in range(1,10):
                 for v in range(1,10):
                     f.write(str(-enc(i,j,v))+" "+str(-enc(i2,j,v))+" 0\n")
 
+
+    # No se repiten valores en los cuadrados 1458
     limites = [(1,1),(1,4),(1,7),(4,1),(4,4),(4,7),(7,1),(7,4),(7,7)]
     cuadrados = []
 
@@ -78,6 +80,7 @@ for sudoku in g:
                 for v in range(1,10):
                     (i,j) = c[ind]
                     (i2,j2) = c[ind2]
+                    if (i==i2 or j==j2): continue
                     f.write(str(-enc(i,j,v))+" "+str(-enc(i2,j2,v))+" 0\n")
 
     f.close()
