@@ -24,7 +24,7 @@ for sudoku in g:
         v = int(l)
         unitarias.append(enc(i,j,v))
 
-    total = 11664 + 81 + len(unitarias)
+    total = 10206 + 81 + len(unitarias)
 
     f.write("p cnf 999 "+str(total)+"\n")
 
