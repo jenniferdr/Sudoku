@@ -5,7 +5,7 @@ Instrucciones para la ejecución del proyecto:
 
 Primero se debe compilar el minisat solver, para ello ejecutar:
 
-    ./complile.sh
+    ./compile.sh
 
 Luego para correr el programa se debe ejecutar el siguiente comando:
 

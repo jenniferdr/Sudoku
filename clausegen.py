@@ -1,11 +1,13 @@
 import subprocess
 import sys
 
+# Representa una casilla y su valor en un entero, para usarlo de nombre de
+# variable en la formula CNF
 def enc(i,j,v):
     return i*100 + j*10 + v
 
 limites = [(1,1),(1,4),(1,7),(4,1),(4,4),(4,7),(7,1),(7,4),(7,7)]
-cuadrados = []
+cuadrados = [] # Guarda las listas con las casillas que conforman cada cuadrado
 
 for (fi,c) in limites:
     set = []
@@ -13,32 +15,6 @@ for (fi,c) in limites:
         for j in range(c,c+3):
             set.append((i,j))
     cuadrados.append(set)
-
-def check(sud):
-    for i in range(1,10):
-        fila = []
-        for j in range(1,10):
-            fila.append( sud[(i,j)] )
-        fila.sort()
-        if (range(1,10) != fila): return "ERROR"
-
-    for j in range(1,10):
-        columna = []
-        for i in range(1,10):
-            columna.append( sud[(i,j)] )
-        columna.sort()
-        if (range(1,10) != columna): return "ERROR"
-
-    for c in cuadrados:
-        cuad = []
-        for (i,j) in c:
-            cuad.append( sud[(i,j)] )
-        cuad.sort()
-        if (range(1,10) != cuad): return "ERROR"
-
-    return "SI"
-
-results = ""
 
 # Generar las clausulas basicas
 clauses = ""
@@ -74,7 +50,7 @@ for i in range(1,10):
                 clauses += str(-enc(i,j,v))+" "+str(-enc(i2,j,v))+" 0\n"
 
 
-# No se repiten valores en los cuadrados 1458
+# No se repiten valores en los cuadrados: 1458
 for c in cuadrados:
     for ind in range(9):
         for ind2 in range(ind+1,9):
@@ -84,7 +60,7 @@ for c in cuadrados:
                 if (i==i2 or j==j2): continue
                 clauses += str(-enc(i,j,v))+" "+str(-enc(i2,j2,v))+" 0\n"
 
-g = open(sys.argv[1])
+g = open(sys.argv[1]) # Archivo con los sudokus a resolver
 
 for sudoku in g:
 
@@ -132,7 +108,6 @@ for sudoku in g:
             if n > 0:
                 res += str( (n % 10) )
                 sud[(n / 100, (n / 10) % 10)] = n % 10
-        #print check(sud) + " : " + res
         print res
     else:
         print "UNSAT"
