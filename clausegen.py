@@ -1,3 +1,14 @@
+# Javier Muniz  08-11277
+# Jennifer Dos Reis 08-10323
+# Jose Goncalves 08-10455
+
+# El sudoku se representa como un conjunto de variables (una por cada combinacion
+# de fila, columna y valor) que deben satisfacer las restricciones normales
+# de un sudoku.
+# Este script genera las clausulas minimas que debe cumplir todo sudoku, en
+# formato DIMACS. Luego para cada sudoku de la entrada se agrega un clausula
+# unitaria por cada valor fijo y se utiliza MiniSAT para resolverlo.
+
 import subprocess
 import sys
 
