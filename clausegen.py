@@ -82,7 +82,7 @@ for sudoku in g:
     i = 1
     j = 0
 
-    for l in sudoku[0:len(sudoku)-2]:
+    for l in sudoku[0:len(sudoku)-1]:
         j += 1
         if j > 9:
             j = 1
